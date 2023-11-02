@@ -1,13 +1,13 @@
 export const requests = [
   {
-    name: "films",
+    name: "movies",
     fetch_url: "https://swapi.dev/api/films/",
-    route: "/explore/films",
+    route: "/movies",
   },
   {
-    name: "people",
+    name: "characters",
     fetch_url: "https://swapi.dev/api/people/",
-    route: "/explore/people",
+    route: "/characters",
   },
   {
     name: "planets",

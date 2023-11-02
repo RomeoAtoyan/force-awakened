@@ -23,9 +23,9 @@ const Home = () => {
           captivating planets. Whether you're a newcomer or a fan, Star Wars
           offers an immersive adventure loved by millions worldwide.
         </LongText>
-        <Link to="/explore">
+        <Link to="/characters">
           <button className="py-2 px-4 bg-black text-StarWars mt-10 text-[#FFE81F]">
-            Explore
+            Explore the characters
           </button>
         </Link>
       </div>
