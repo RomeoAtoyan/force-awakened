@@ -6,7 +6,7 @@ const GoBackButton = ({ url }) => {
   return (
     <button
       onClick={() => navigate(url)}
-      className="p-2 absolute bg-[#FFE81F] m-4"
+      className="p-2 absolute bg-[#FFE81F] m-4 z-10"
     >
       <BiArrowBack size={25} />
     </button>

@@ -9,11 +9,14 @@ import { BarLoader } from "react-spinners";
 import AppData from "../Context/ApiData";
 
 const MoviesId = () => {
-  const { selectedMovie } = useContext(AppData);
+  const { selectedMovie, setSelectedMovie } = useContext(AppData);
 
   useEffect(() => {
-    console.log("selectedMovie", selectedMovie);
-  }, [selectedMovie]);
+    const storedSelectedMovie = localStorage.getItem("selectedMovie");
+    if (storedSelectedMovie) {
+      setSelectedMovie(JSON.parse(storedSelectedMovie));
+    }
+  }, [setSelectedMovie]);
 
   useEffect(() => {
     document.body.style.height = "90vh";
@@ -40,8 +43,10 @@ const MoviesId = () => {
           species={selectedMovie?.species}
           planets={selectedMovie?.planets}
         />
-        <div className="h-48 w-80 mx-auto relative ">
-          <button className="absolute z-50 bottom-[-50%] px-3 py-1 bg-white">Opening Text</button>
+        <div className="h-48 w-100 mt-5 relative bg-black overflow-hidden">
+          <button className="absolute z-50 bottom-[-50%] px-3 py-1 bg-white">
+            Opening Text
+          </button>
           <Crawl text={selectedMovie?.opening_crawl} />
         </div>
       </div>

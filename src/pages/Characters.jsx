@@ -54,7 +54,7 @@ const Characters = () => {
             {characters?.results?.map((character, index) => (
               <span
                 key={index}
-                className="flex justify-between items-center text-StarWars text-white text-sm font-light tracking-widest bg-[#1f1f1f] px-4 py-3 "
+                className="flex justify-between items-center text-white font-light tracking-widest bg-[#1f1f1f] px-4 py-3 "
               >
                 {character.name}
                 <CiShare1

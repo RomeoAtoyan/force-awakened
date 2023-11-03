@@ -33,7 +33,7 @@ export const AppDataProvider = ({ children }) => {
     };
 
     fetchCharacters();
-  }, [peopleUrl, characterPage, characterLoading]);
+  }, [peopleUrl, characterPage]);
 
   useEffect(() => {
     const fetchMovies = async () => {

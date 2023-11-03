@@ -20,12 +20,14 @@ const Movies = () => {
   } = useContext(AppData);
   const navigate = useNavigate();
 
-  const goToMovieId = (movie, url) => {
-    setSelectedMovie(movie);
-    const modifiedString = url.split("/");
-    const id = modifiedString[modifiedString.length - 2];
-    navigate(`/movies/${id}`);
-  };
+const goToMovieId = (movie, url) => {
+  setSelectedMovie(movie);
+  const modifiedString = url.split("/");
+  const id = modifiedString[modifiedString.length - 2];
+  localStorage.setItem('selectedMovie', JSON.stringify(movie));
+  navigate(`/movies/${id}`);
+};
+
 
   const nextPage = () => {
     setMoviesLoading(true);
@@ -61,7 +63,7 @@ const Movies = () => {
             {movies?.results?.map((movie, index) => (
               <span
                 key={index}
-                className="flex justify-between items-center text-StarWars text-white text-sm font-light tracking-widest bg-[#1f1f1f] px-4 py-3 "
+                className="flex justify-between items-center text-white font-light tracking-widest bg-[#1f1f1f] px-4 py-3 "
               >
                 {movie?.title}
                 <CiShare1

@@ -6,7 +6,6 @@
   background-color: black;
   color: yellow;
   transform: perspective(400px) rotateX(40deg);
-  box-shadow: 0 30px 30px 40px black;
 }
 
 .text {
@@ -18,12 +17,13 @@
   transform: translateX(-50%);
   font-size: 2em;
   white-space: wrap;
-  animation: scroll 100s linear infinite;
+  animation: scroll 50s linear infinite;
 }
 
 @keyframes scroll {
   0% {
     transform: translate(-50%, 100%);
+    animation-timing-function: linear;
   }
 
   100% {
