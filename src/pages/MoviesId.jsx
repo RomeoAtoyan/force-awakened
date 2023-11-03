@@ -7,6 +7,7 @@ import MovieCard from "../Components/Card/MovieCard";
 import Crawl from "../Components/Crawl/Crawl";
 import GoBackButton from "../Components/GoBackButton/GoBackButton";
 import AppData from "../Context/ApiData";
+import FadeIn from "../Animations/FadeIn";
 
 const MoviesId = () => {
   const { selectedMovie, setSelectedMovie } = useContext(AppData);
@@ -38,31 +39,35 @@ const MoviesId = () => {
   }, []);
 
   return (
-    <div className="max-h-screen ">
-      <div className="h-10 p-4 sm:px-20 mt-2 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
-        <GoBackButton url="/movies" />
-      </div>
-      {loading ? (
-        <div className="h-40 flex items-center justify-center">
-          <BarLoader width={300} color="yellow" />
+    <FadeIn duration={0.5}>
+      <div className="max-h-screen ">
+        <div className="h-10 p-4 sm:px-20 mt-2 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
+          <GoBackButton url="/movies" />
         </div>
-      ) : (
-        <div className="relative p-4 sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
-          <MovieCard
-            title={selectedMovie?.title}
-            date={selectedMovie?.release_date}
-            director={selectedMovie?.director}
-            producer={selectedMovie?.producer}
-            characters={selectedMovie?.characters}
-            species={selectedMovie?.species}
-            planets={selectedMovie?.planets}
-          />
-          <div className="h-48 w-100 mt-5 relative bg-black overflow-hidden lg:h-80">
-            <Crawl text={selectedMovie?.opening_crawl} />
+        {loading ? (
+          <div className="h-40 flex items-center justify-center">
+            <BarLoader width={300} color="yellow" />
           </div>
-        </div>
-      )}
-    </div>
+        ) : (
+          <FadeIn duration={.5}>
+            <div className="relative p-4 sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
+              <MovieCard
+                title={selectedMovie?.title}
+                date={selectedMovie?.release_date}
+                director={selectedMovie?.director}
+                producer={selectedMovie?.producer}
+                characters={selectedMovie?.characters}
+                species={selectedMovie?.species}
+                planets={selectedMovie?.planets}
+              />
+              <div className="h-48 w-100 mt-5 relative bg-black overflow-hidden lg:h-80">
+                <Crawl text={selectedMovie?.opening_crawl} />
+              </div>
+            </div>
+          </FadeIn>
+        )}
+      </div>
+    </FadeIn>
   );
 };
 

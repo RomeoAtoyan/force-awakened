@@ -7,6 +7,7 @@ import CharacterCard from "../Components/Card/CharacterCard";
 import GoBackButton from "../Components/GoBackButton/GoBackButton";
 import Title from "../Components/Title/Title";
 import { CiShare1 } from "react-icons/ci";
+import FadeIn from "../Animations/FadeIn";
 
 const CharacterId = () => {
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ const CharacterId = () => {
   };
 
   return (
-    <div>
+    <>
       <div className="h-10 sm:px-20 mt-2 p-4 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
         <GoBackButton url="/characters" />
       </div>
@@ -93,50 +94,54 @@ const CharacterId = () => {
         </div>
       ) : (
         <div className="relative p-4 sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] lt:flex lt:items-end 2xl:px-[35rem]">
-          <CharacterCard
-            name={character?.name}
-            birth={character?.birth_year}
-            gender={character?.gender}
-            eyes={character?.eye_color}
-            hair={character?.hair_color}
-            height={character?.height}
-            weight={character?.mass}
-            homeworld={home?.name}
-            terrain={home?.terrain}
-            played_in={character?.films.length}
-            setShowMovies={setShowMovies}
-            showMovies={showMovies}
-          />
+          <FadeIn duration={.5}>
+            <CharacterCard
+              name={character?.name}
+              birth={character?.birth_year}
+              gender={character?.gender}
+              eyes={character?.eye_color}
+              hair={character?.hair_color}
+              height={character?.height}
+              weight={character?.mass}
+              homeworld={home?.name}
+              terrain={home?.terrain}
+              played_in={character?.films.length}
+              setShowMovies={setShowMovies}
+              showMovies={showMovies}
+            />
+          </FadeIn>
           {showMovies &&
             (moviesLoading ? (
               <div className="p-4 h-40 flex justify-center items-center">
                 <BarLoader color="#FFE81F" />
               </div>
             ) : (
-              <div className="p-4 bg-[#1f1f1f] mt-5 lt:ml-5">
-                <Title className="underline" color="white">
-                  Movies:
-                </Title>
-                <div className="flex flex-col gap-2 mt-5 xl:grid xl:grid-rows-2 xl:grid-flow-col xl:gap-4">
-                  {movies?.map((movie, index) => (
-                    <span
-                      key={index}
-                      className="flex justify-between items-center text-white text-sm font-light tracking-widest bg-[#242424] px-4 py-3  "
-                    >
-                      {movie?.title}
-                      <CiShare1
-                        onClick={() => goToMovieId(movie?.url)}
-                        size={20}
-                        color="white"
-                      />
-                    </span>
-                  ))}
+              <FadeIn duration={.5}>
+                <div className="p-4 bg-[#1f1f1f] mt-5 lt:ml-5">
+                  <Title className="underline" color="white">
+                    Movies:
+                  </Title>
+                  <div className="flex flex-col gap-2 mt-5 xl:grid xl:grid-rows-2 xl:grid-flow-col xl:gap-4">
+                    {movies?.map((movie, index) => (
+                      <span
+                        key={index}
+                        className="flex justify-between items-center text-white text-sm font-light tracking-widest bg-[#242424] px-4 py-3  "
+                      >
+                        {movie?.title}
+                        <CiShare1
+                          onClick={() => goToMovieId(movie?.url)}
+                          size={20}
+                          color="white"
+                        />
+                      </span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              </FadeIn>
             ))}
         </div>
       )}
-    </div>
+    </>
   );
 };
 

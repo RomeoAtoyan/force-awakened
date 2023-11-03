@@ -3,10 +3,11 @@ import LongText from "../Components/LongText/LongText";
 import gif from "../assets/gifs/home_gif.gif";
 import Title from "../Components/Title/Title";
 import GIF from "../Components/GIF/GIF";
+import FadeIn from "../Animations/FadeIn";
 
 const Home = () => {
   return (
-    <>
+    <FadeIn duration={.5}>
       <GIF src={gif} />
       <div className="p-4 text-white sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
         <Title className="lg:text-3xl">Star Wars newbie ?</Title>
@@ -30,7 +31,7 @@ const Home = () => {
           </button>
         </Link>
       </div>
-    </>
+    </FadeIn>
   );
 };
 

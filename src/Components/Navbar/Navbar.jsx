@@ -143,7 +143,7 @@ const Navbar = () => {
           />
         </nav>
         {input && (
-          <FadeIn>
+          <FadeIn duration={.2}>
             <div className="z-50 absolute top-[100%] w-full md:w-max px-4 right-0 md:right-20 bg-gray-700 lg:right-[15%] 2xl:right-[24.5%]">
               <div className="pt-4">
                 <div>
@@ -203,7 +203,7 @@ const Navbar = () => {
       </header>
 
       {open && (
-        <FadeIn>
+        <FadeIn duration={0.2}>
           <aside className="z-50 absolute h-40 w-full bg-black text-white flex items-center gap-1 flex-col justify-center md:hidden">
             <Link
               onClick={() => {
