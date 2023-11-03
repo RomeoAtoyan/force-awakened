@@ -48,7 +48,7 @@ const CharacterCard = ({
             </span>
           </span>
           <span className="capitalize text-[#FFE81F] flex items-center gap-3">
-            Movies played in : <span className="text-white">{played_in}</span>
+            Movies played in : <span className="text-white cursor-pointer">{played_in}</span>
             {!showMovies && (
               <span
                 onClick={() => setShowMovies(true)}

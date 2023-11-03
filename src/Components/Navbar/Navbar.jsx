@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { CiShare1 } from "react-icons/ci";
 import { RxHamburgerMenu } from "react-icons/rx";
@@ -10,47 +10,59 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState(false);
   const [results, setResults] = useState("");
+  const [error, setError] = useState(false);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const [searchCategory, setSearchCategory] = useState("");
-  const [error, setError] = useState(false);
   const navigate = useNavigate();
+  const [arr1, setArr1] = useState([]);
+  const [arr2, setArr2] = useState([]);
 
-  const getResults = () => {
-    const whichCategory = searchCategory === "characters" ? "people" : "films";
+  const getResults = async () => {
+    if (query) {
+      try {
+        setLoading(true);
+        const res1 = await fetch(
+          `https://swapi.dev/api/people/?search=${query}`
+        );
+        const data1 = await res1.json();
+        setArr1(data1?.results);
 
-    if (!searchCategory) {
-      alert("Choose a topic first !!");
+        const res2 = await fetch(
+          `https://swapi.dev/api/films/?search=${query}`
+        );
+        const data2 = await res2.json();
+        setArr2(data2?.results);
+        setLoading(false);
+      } catch (error) {
+        error && console.log(error);
+      }
+    } else {
       setError(true);
-    } else if (searchCategory && !query) {
-      alert("What are you searching for ??");
-      setError(true);
-    } else if (searchCategory && query) {
-      setError(false);
-      setLoading(true);
-      fetch(`https://swapi.dev/api/${whichCategory}/?search=${query}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setResults(data?.results);
-          setLoading(false);
-          setQuery("");
-        })
-        .then((error) => console.log(error));
     }
   };
 
   const whenError = error
-    ? "border-2 border-red-700 bg-red-200"
+    ? "bg-red-300 border-2 border-red-700"
     : "border-none";
 
-  const goToCharacterId = (url) => {
+  useEffect(() => {
+    if (arr1 && arr2) {
+      setResults([...arr1, ...arr2]);
+      setLoading(false);
+    }
+
+    console.log([...arr1, ...arr2]);
+  }, [arr1, arr2]);
+
+  const goToCharacterId = (url, data) => {
     const modifiedString = url.split("/");
     const id = modifiedString[modifiedString.length - 2];
-    const goToUrl = `/characters/${id}`;
+    const goToUrl = "gender" in data ? `/characters/${id}` : `/movies/${id}`;
     setOpen(false);
     setQuery("");
     setLoading(false);
     setInput(false);
+    setResults([]);
     navigate(goToUrl);
   };
 
@@ -122,35 +134,14 @@ const Navbar = () => {
           <FadeIn>
             <div className="z-50 absolute top-[100%] px-4 right-20 bg-black lg:right-[15%] 2xl:right-[24.5%]">
               <div className="pt-4">
-                <span className="text-white p-4 capitalize">
-                  <span
-                    onClick={() => {
-                      setError(false);
-                      setSearchCategory("characters");
-                    }}
-                    className="underline cursor-pointer"
-                  >
-                    characters
-                  </span>{" "}
-                  or{" "}
-                  <span
-                    onClick={() => {
-                      setError(false);
-                      setSearchCategory("movies");
-                    }}
-                    className="underline cursor-pointer"
-                  >
-                    movies
-                  </span>
-                </span>
                 <div>
                   <input
                     onChange={(e) => {
-                      setError(false);
                       setQuery(e.target.value);
+                      setError(false);
                     }}
                     value={query}
-                    placeholder={`search ${searchCategory}`}
+                    placeholder="search"
                     className={`${whenError} remove-border-radius outline-none m-4 pl-1`}
                     type="text"
                   />
@@ -161,12 +152,11 @@ const Navbar = () => {
                     Go
                   </button>
                 </div>
+                {error && (
+                  <span className="text-red-600 ml-4">dont forget what !</span>
+                )}
               </div>
-              {results && results.length === 0 ? (
-                <span className="text-white p-4">
-                  Nothing found with your search query...
-                </span>
-              ) : loading ? (
+              {loading ? (
                 <div className="m-4">
                   <BarLoader color="yellow" />
                 </div>
@@ -180,7 +170,7 @@ const Navbar = () => {
                             result?.title ||
                             "No results were found matching your input"}
                           <CiShare1
-                            onClick={() => goToCharacterId(result?.url)}
+                            onClick={() => goToCharacterId(result?.url, result)}
                             size={20}
                             color="white"
                           />
