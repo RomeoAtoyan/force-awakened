@@ -132,7 +132,7 @@ const Navbar = () => {
         </nav>
         {input && (
           <FadeIn>
-            <div className="z-50 absolute top-[100%] px-4 right-20 bg-gray-700 lg:right-[15%] 2xl:right-[24.5%]">
+            <div className="z-50 absolute top-[100%] w-full md:w-max px-4 right-0 md:right-20 bg-gray-700 lg:right-[15%] 2xl:right-[24.5%]">
               <div className="pt-4">
                 <div>
                   <input
