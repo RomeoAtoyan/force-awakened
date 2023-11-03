@@ -14,3 +14,4 @@ project should run on localhost:3000
 - project can also be viewed locally on any mobile phone to see live changes. by going to this url : ip_adress:3000 (your own ip adress and the port the project is running on)
 
 Now you can run the project locally on your machine and/or phone.
+👨⚔️🧑
