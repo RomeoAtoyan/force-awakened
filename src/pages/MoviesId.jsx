@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import findUrl from "../ApiRequests/findUrl";
 import { requests } from "../ApiRequests/requests";
@@ -6,61 +6,45 @@ import GoBackButton from "../Components/GoBackButton/GoBackButton";
 import MovieCard from "../Components/Card/MovieCard";
 import Crawl from "../Components/Crawl/Crawl";
 import { BarLoader } from "react-spinners";
+import AppData from "../Context/ApiData";
+
 const MoviesId = () => {
-  const params = useParams();
-  const detailsUrl = findUrl(requests, "movies");
-  const [movie, setMovie] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const { selectedMovie } = useContext(AppData);
 
   useEffect(() => {
-    const fetchDetails = async () => {
-      try {
-        const response = await fetch(detailsUrl + params.id);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setMovie(data);
-        console.log(data);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error:", error);
-      }
-    };
-    fetchDetails();
+    console.log("selectedMovie", selectedMovie);
+  }, [selectedMovie]);
 
-    document.body.style.height = "100vh";
+  useEffect(() => {
+    document.body.style.height = "90vh";
     document.body.style.overflow = "hidden";
 
     return () => {
       document.body.style.height = "auto";
       document.body.style.overflow = "auto";
     };
-  }, [detailsUrl, params.id]);
+  }, []);
 
   return (
-    <div className="max-h-screen  overflow-hidden">
+    <div className="max-h-screen ">
       <div className="h-10">
         <GoBackButton url="/movies" />
       </div>
-      {loading ? (
-        <div className="h-40 flex items-center justify-center">
-          <BarLoader color="#FFE81F" />
+      <div className="relative p-4">
+        <MovieCard
+          title={selectedMovie?.title}
+          date={selectedMovie?.release_date}
+          director={selectedMovie?.director}
+          producer={selectedMovie?.producer}
+          characters={selectedMovie?.characters}
+          species={selectedMovie?.species}
+          planets={selectedMovie?.planets}
+        />
+        <div className="h-48 w-80 mx-auto relative ">
+          <button className="absolute z-50 bottom-[-50%] px-3 py-1 bg-white">Opening Text</button>
+          <Crawl text={selectedMovie?.opening_crawl} />
         </div>
-      ) : (
-        <div className="relative p-4">
-          <MovieCard
-            title={movie.title}
-            date={movie.release_date}
-            director={movie.director}
-            producer={movie.producer}
-            characters={movie.characters}
-            species={movie.species}
-            planets={movie.planets}
-          />
-          <Crawl text={movie.opening_crawl} />
-        </div>
-      )}
+      </div>
     </div>
   );
 };

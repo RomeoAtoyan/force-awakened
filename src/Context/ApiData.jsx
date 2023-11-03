@@ -4,6 +4,8 @@ import findUrl from "../ApiRequests/findUrl";
 const AppData = createContext();
 
 export const AppDataProvider = ({ children }) => {
+  const [selectedMovie, setSelectedMovie] = useState(null);
+
   const [characters, setCharacters] = useState([]);
   const [characterPage, setCharacterPage] = useState(1);
   const [characterLoading, setCharacterLoading] = useState(true);
@@ -65,6 +67,8 @@ export const AppDataProvider = ({ children }) => {
         setCharacterPage,
         characterLoading,
         setCharacterLoading,
+        selectedMovie,
+        setSelectedMovie,
       }}
     >
       {children}

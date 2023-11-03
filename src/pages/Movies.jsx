@@ -9,15 +9,22 @@ import gif from "../assets/gifs/films_gif.gif";
 import { BarLoader } from "react-spinners";
 
 const Movies = () => {
-  const { movies, moviesPage, setMoviesPage, moviesLoading, setMoviesLoading } =
-    useContext(AppData);
+  const {
+    movies,
+    moviesPage,
+    setMoviesPage,
+    moviesLoading,
+    setMoviesLoading,
+    selectedMovie,
+    setSelectedMovie,
+  } = useContext(AppData);
   const navigate = useNavigate();
 
-  const goToMovieId = (url) => {
+  const goToMovieId = (movie, url) => {
+    setSelectedMovie(movie);
     const modifiedString = url.split("/");
     const id = modifiedString[modifiedString.length - 2];
-    const goToUrl = `/movies/${id}`;
-    navigate(goToUrl);
+    navigate(`/movies/${id}`);
   };
 
   const nextPage = () => {
@@ -33,6 +40,10 @@ const Movies = () => {
       setMoviesPage((prevPage) => prevPage - 1);
     }
   };
+
+  useEffect(() => {
+    console.log(selectedMovie);
+  }, [selectedMovie]);
 
   return (
     <div>
@@ -54,7 +65,7 @@ const Movies = () => {
               >
                 {movie?.title}
                 <CiShare1
-                  onClick={() => goToMovieId(movie?.url)}
+                  onClick={() => goToMovieId(movie, movie.url)}
                   size={20}
                   color="white"
                 />
