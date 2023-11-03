@@ -24,7 +24,7 @@ const Characters = () => {
   return (
     <div>
       <GIF src={gif} />
-      <div className="p-4">
+      <div className="p-4 pb-16">
         <Title className="underline" color="white">
           Characters
         </Title>

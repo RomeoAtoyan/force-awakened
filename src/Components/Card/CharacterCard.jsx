@@ -12,10 +12,13 @@ const CharacterCard = ({
   weight,
   homeworld,
   terrain,
+  played_in,
+  setShowMovies,
+  showMovies,
 }) => {
   return (
     <div>
-      <div className="min-h-60 bg-[#1f1f1f] mt-8 m-4 p-4">
+      <div className="min-h-60 bg-[#1f1f1f] mt-8 p-4">
         <Title className="underline text-white">{name}</Title>
         <div className="pt-5">
           <span className="capitalize text-[#FFE81F] flex items-center gap-3">
@@ -27,13 +30,10 @@ const CharacterCard = ({
           <span className="capitalize text-[#FFE81F] flex items-center gap-3">
             eye color :
             <BsEyeFill color={eyes} />
-            <span className="text-white">
-              ({eyes || "not available"})
-            </span>
+            <span className="text-white">({eyes || "not available"})</span>
           </span>
           <span className="capitalize text-[#FFE81F] flex items-center gap-3">
-            hair color :{" "}
-            <span className="text-white">{hair}</span>
+            hair color : <span className="text-white">{hair}</span>
           </span>
           <span className="capitalize text-[#FFE81F] flex items-center gap-3">
             height :<span className="text-white">{height} cm</span>
@@ -46,6 +46,17 @@ const CharacterCard = ({
             <span className="text-white">
               {homeworld} ({terrain})
             </span>
+          </span>
+          <span className="capitalize text-[#FFE81F] flex items-center gap-3">
+            Movies played in : <span className="text-white">{played_in}</span>
+            {!showMovies && (
+              <span
+                onClick={() => setShowMovies(true)}
+                className="text-gray-700"
+              >
+                (show movies)
+              </span>
+            )}
           </span>
         </div>
       </div>
