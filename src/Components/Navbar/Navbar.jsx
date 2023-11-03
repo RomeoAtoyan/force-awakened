@@ -1,12 +1,10 @@
-import { useEffect, useState } from "react";
-import { RxHamburgerMenu } from "react-icons/rx";
-import { AiOutlineClose } from "react-icons/ai";
-import { AiOutlineSearch } from "react-icons/ai";
-import FadeIn from "../../Animations/FadeIn";
-import { Link, useNavigate } from "react-router-dom";
-import { requests } from "../../ApiRequests/requests";
-import { BarLoader } from "react-spinners";
+import { useState } from "react";
+import { AiOutlineClose, AiOutlineSearch } from "react-icons/ai";
 import { CiShare1 } from "react-icons/ci";
+import { RxHamburgerMenu } from "react-icons/rx";
+import { Link, useNavigate } from "react-router-dom";
+import { BarLoader } from "react-spinners";
+import FadeIn from "../../Animations/FadeIn";
 
 const Navbar = () => {
   const [open, setOpen] = useState(false);
@@ -14,19 +12,36 @@ const Navbar = () => {
   const [results, setResults] = useState("");
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
+  const [searchCategory, setSearchCategory] = useState("");
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   const getResults = () => {
-    setLoading(true);
-    fetch(`https://swapi.dev/api/people/?search=${query}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setResults(data.results);
-        setLoading(false);
-        setQuery("");
-        console.log(data.results);
-      });
+    const whichCategory = searchCategory === "characters" ? "people" : "films";
+
+    if (!searchCategory) {
+      alert("Choose a topic first !!");
+      setError(true);
+    } else if (searchCategory && !query) {
+      alert("What are you searching for ??");
+      setError(true);
+    } else if (searchCategory && query) {
+      setError(false);
+      setLoading(true);
+      fetch(`https://swapi.dev/api/${whichCategory}/?search=${query}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setResults(data?.results);
+          setLoading(false);
+          setQuery("");
+        })
+        .then((error) => console.log(error));
+    }
   };
+
+  const whenError = error
+    ? "border-2 border-red-700 bg-red-200"
+    : "border-none";
 
   const goToCharacterId = (url) => {
     const modifiedString = url.split("/");
@@ -82,20 +97,53 @@ const Navbar = () => {
       </header>
       {input && (
         <FadeIn>
-          <div className="h-max w-full shadow-lg border-b-2 border-[#FFE81F] absolute bg-black">
-            <div>
-              <input
-                onChange={(e) => setQuery(e.target.value)}
-                value={query}
-                placeholder="search characters"
-                className="border-none outline-none m-4 pl-1"
-                type="text"
-              />
-              <button className="text-black bg-white px-2" onClick={getResults}>
-                Search
-              </button>
+          <div className="h-max w-full shadow-lg border-b-2 z-50 border-[#FFE81F] absolute bg-black">
+            <div className="pt-4">
+              <span className="text-white p-4 capitalize">
+                <span
+                  onClick={() => {
+                    setError(false);
+                    setSearchCategory("characters");
+                  }}
+                  className="underline"
+                >
+                  characters
+                </span>{" "}
+                or{" "}
+                <span
+                  onClick={() => {
+                    setError(false);
+                    setSearchCategory("movies");
+                  }}
+                  className="underline"
+                >
+                  movies
+                </span>
+              </span>
+              <div>
+                <input
+                  onChange={(e) => {
+                    setError(false);
+                    setQuery(e.target.value);
+                  }}
+                  value={query}
+                  placeholder={`search ${searchCategory}`}
+                  className={`${whenError} remove-border-radius outline-none m-4 pl-1`}
+                  type="text"
+                />
+                <button
+                  className="text-black bg-white px-2 p-0.5"
+                  onClick={getResults}
+                >
+                  Go
+                </button>
+              </div>
             </div>
-            {loading ? (
+            {results && results.length === 0 ? (
+              <span className="text-white p-4">
+                Nothing found with your search query...
+              </span>
+            ) : loading ? (
               <div className="m-4">
                 <BarLoader color="yellow" />
               </div>
@@ -103,17 +151,18 @@ const Navbar = () => {
               results && (
                 <div className="flex flex-col gap-2 p-4">
                   {results?.map((result, index) => (
-                    <span
-                      key={index}
-                      className="flex justify-between items-center text-white font-light tracking-widest bg-[#1f1f1f] px-4 py-3 "
-                    >
-                      {result?.name || result?.title}
-                      <CiShare1
-                        onClick={() => goToCharacterId(result?.url)}
-                        size={20}
-                        color="white"
-                      />
-                    </span>
+                    <div key={index}>
+                      <span className="flex justify-between items-center text-white font-light tracking-widest bg-[#1f1f1f] px-4 py-3 ">
+                        {result?.name ||
+                          result?.title ||
+                          "No results were found matching your input"}
+                        <CiShare1
+                          onClick={() => goToCharacterId(result?.url)}
+                          size={20}
+                          color="white"
+                        />
+                      </span>
+                    </div>
                   ))}
                 </div>
               )
@@ -121,6 +170,7 @@ const Navbar = () => {
           </div>
         </FadeIn>
       )}
+
       {open && (
         <FadeIn>
           <aside className="z-50 absolute h-40 w-full bg-black text-white flex items-center gap-1 flex-col justify-center">

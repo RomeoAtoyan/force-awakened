@@ -20,14 +20,13 @@ const Movies = () => {
   } = useContext(AppData);
   const navigate = useNavigate();
 
-const goToMovieId = (movie, url) => {
-  setSelectedMovie(movie);
-  const modifiedString = url.split("/");
-  const id = modifiedString[modifiedString.length - 2];
-  localStorage.setItem('selectedMovie', JSON.stringify(movie));
-  navigate(`/movies/${id}`);
-};
-
+  const goToMovieId = (movie, url) => {
+    setSelectedMovie(movie);
+    const modifiedString = url.split("/");
+    const id = modifiedString[modifiedString.length - 2];
+    localStorage.setItem("selectedMovie", JSON.stringify(movie));
+    navigate(`/movies/${id}`);
+  };
 
   const nextPage = () => {
     setMoviesLoading(true);
@@ -43,13 +42,9 @@ const goToMovieId = (movie, url) => {
     }
   };
 
-  useEffect(() => {
-    console.log(selectedMovie);
-  }, [selectedMovie]);
-
   return (
     <div>
-      <GIF src={gif} />
+      <GIF url="/" src={gif} />
       {moviesLoading ? (
         <div className="h-40 flex items-center justify-center">
           <BarLoader color="#FFE81F" />
@@ -65,9 +60,9 @@ const goToMovieId = (movie, url) => {
                 key={index}
                 className="flex justify-between items-center text-white font-light tracking-widest bg-[#1f1f1f] px-4 py-3 "
               >
-                {movie?.title}
+                {movie.title || "No results were found"}
                 <CiShare1
-                  onClick={() => goToMovieId(movie, movie.url)}
+                  onClick={() => goToMovieId(movie, movie?.url)}
                   size={20}
                   color="white"
                 />

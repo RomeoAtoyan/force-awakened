@@ -1,11 +1,7 @@
-import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import findUrl from "../ApiRequests/findUrl";
-import { requests } from "../ApiRequests/requests";
-import GoBackButton from "../Components/GoBackButton/GoBackButton";
+import { useContext, useEffect } from "react";
 import MovieCard from "../Components/Card/MovieCard";
 import Crawl from "../Components/Crawl/Crawl";
-import { BarLoader } from "react-spinners";
+import GoBackButton from "../Components/GoBackButton/GoBackButton";
 import AppData from "../Context/ApiData";
 
 const MoviesId = () => {

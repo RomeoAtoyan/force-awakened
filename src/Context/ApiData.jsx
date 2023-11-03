@@ -51,7 +51,7 @@ export const AppDataProvider = ({ children }) => {
     };
 
     fetchMovies();
-  }, [filmUrl, moviesPage, moviesLoading]);
+  }, [filmUrl, moviesPage]);
 
   return (
     <AppData.Provider

@@ -29,3 +29,9 @@ body {
 .text-StarWars {
   font-family: "Star Wars";
 }
+
+/* remove border radius for IOS */
+.remove-border-radius {
+  -webkit-border-radius: 0px;
+  border-radius: 0;
+}
