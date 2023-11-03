@@ -1,7 +1,7 @@
 const LongText = ({ children, className }) => {
   return (
     <div className={className}>
-      <p className="text-sm leading-5 ">{children}</p>
+      <p className="text-sm leading-5 lg:text-lg ">{children}</p>
     </div>
   );
 };

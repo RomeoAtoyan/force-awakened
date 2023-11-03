@@ -57,23 +57,47 @@ const Navbar = () => {
   return (
     <>
       <header className="relative">
-        <nav className="flex flex-1 items-center justify-between h-16 bg-[#1f1f1f] p-4">
-          {open ? (
-            <AiOutlineClose
-              size={40}
-              color="white"
-              onClick={() => setOpen(false)}
-            />
-          ) : (
-            <RxHamburgerMenu
+        <nav className="flex flex-1 items-center justify-between h-16 bg-[#1f1f1f] p-4 sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
+          <div className="md:hidden">
+            {open ? (
+              <AiOutlineClose
+                size={40}
+                color="white"
+                onClick={() => setOpen(false)}
+              />
+            ) : (
+              <RxHamburgerMenu
+                onClick={() => {
+                  setInput(false);
+                  setOpen(true);
+                }}
+                color="white"
+                size={40}
+              />
+            )}
+          </div>
+          <div className="sm:hidden md:flex md:w-8 md:gap-10 text-white underline">
+            <Link
               onClick={() => {
                 setInput(false);
-                setOpen(true);
+                setOpen(false);
               }}
-              color="white"
-              size={40}
-            />
-          )}
+              className="bg-[#242424] px-3 py-1"
+              to="/movies"
+            >
+              Movies
+            </Link>
+            <Link
+              onClick={() => {
+                setInput(false);
+                setOpen(false);
+              }}
+              className="bg-[#242424] px-3 py-1"
+              to="/characters"
+            >
+              Characters
+            </Link>
+          </div>
           <Link
             onClick={() => {
               setInput(false);
@@ -81,7 +105,7 @@ const Navbar = () => {
             }}
             to="/"
           >
-            <h2 className=" text-[#FFE81F] text-2xl text-shadow text-StarWars">
+            <h2 className=" text-[#FFE81F] text-2xl text-shadow text-StarWars lg:text-3xl">
               Star Wars
             </h2>
           </Link>
@@ -97,7 +121,7 @@ const Navbar = () => {
       </header>
       {input && (
         <FadeIn>
-          <div className="h-max w-full shadow-lg border-b-2 z-50 border-[#FFE81F] absolute bg-black">
+          <div className="h-max w-full right-0 shadow-lg border-b-2 z-50 border-[#FFE81F] absolute bg-black sm:w-max sm:right-20 sm:p-4 md:w-72 md:right-20 lg:right-40 xl:right-52 lt:right-72 2xl:right-100 2xl:mr-5">
             <div className="pt-4">
               <span className="text-white p-4 capitalize">
                 <span
@@ -173,7 +197,7 @@ const Navbar = () => {
 
       {open && (
         <FadeIn>
-          <aside className="z-50 absolute h-40 w-full bg-black text-white flex items-center gap-1 flex-col justify-center">
+          <aside className="z-50 absolute h-40 w-full bg-black text-white flex items-center gap-1 flex-col justify-center md:hidden">
             <Link
               onClick={() => {
                 setInput(false);

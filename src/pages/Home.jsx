@@ -8,15 +8,16 @@ const Home = () => {
   return (
     <>
       <GIF src={gif} />
-      <div className="p-4 text-white">
-        <Title>Star Wars newbie ?</Title>
-        <LongText className={"mt-4"}>
-          <span className="text-[#FFE81F]  text-sm ">Star Wars</span> is a
-          famous sci-fi franchise set in a distant galaxy. It follows the battle
-          between <span className="text-blue-700  text-sm ">good</span> and{" "}
-          <span className="text-red-700  text-sm ">evil</span> , with the Rebel
-          Alliance fighting the Galactic Empire. The story features Jedi
-          knights, Sith lords, smugglers, and droids. Themes of hope,
+      <div className="p-4 text-white sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
+        <Title className="lg:text-3xl">Star Wars newbie ?</Title>
+        <LongText className={"mt-4 lg:text-3xl"}>
+          <span className="text-[#FFE81F]  text-sm lg:text-lg ">Star Wars</span>{" "}
+          is a famous sci-fi franchise set in a distant galaxy. It follows the
+          battle between{" "}
+          <span className="text-blue-700  text-sm lg:text-lg ">good</span> and{" "}
+          <span className="text-red-700  text-sm lg:text-lg">evil</span> , with
+          the Rebel Alliance fighting the Galactic Empire. The story features
+          Jedi knights, Sith lords, smugglers, and droids. Themes of hope,
           redemption, and the power of the Force are explored. Star Wars
           showcases space battles, lightsaber duels, and encounters with unique
           aliens. It's known for iconic vehicles like the Millennium Falcon and

@@ -26,10 +26,10 @@ const MoviesId = () => {
 
   return (
     <div className="max-h-screen ">
-      <div className="h-10">
+      <div className="h-10 sm:px-20 mt-2 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
         <GoBackButton url="/movies" />
       </div>
-      <div className="relative p-4">
+      <div className="relative p-4 sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
         <MovieCard
           title={selectedMovie?.title}
           date={selectedMovie?.release_date}
@@ -39,10 +39,7 @@ const MoviesId = () => {
           species={selectedMovie?.species}
           planets={selectedMovie?.planets}
         />
-        <div className="h-48 w-100 mt-5 relative bg-black overflow-hidden">
-          <button className="absolute z-50 bottom-[-50%] px-3 py-1 bg-white">
-            Opening Text
-          </button>
+        <div className="h-48 w-100 mt-5 relative bg-black overflow-hidden lg:h-80">
           <Crawl text={selectedMovie?.opening_crawl} />
         </div>
       </div>

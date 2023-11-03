@@ -17,7 +17,7 @@ const CharacterCard = ({
   showMovies,
 }) => {
   return (
-    <div>
+    <div >
       <div className="min-h-60 bg-[#1f1f1f] mt-8 p-4">
         <Title className="underline text-white">{name}</Title>
         <div className="pt-5">

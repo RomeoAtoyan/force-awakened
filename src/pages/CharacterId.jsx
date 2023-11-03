@@ -83,8 +83,8 @@ const CharacterId = () => {
   };
 
   return (
-    <>
-      <div className="h-10">
+    <div>
+      <div className="h-10 sm:px-20 mt-2 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
         <GoBackButton url="/characters" />
       </div>
       {loading ? (
@@ -92,7 +92,7 @@ const CharacterId = () => {
           <BarLoader color="#FFE81F" />
         </div>
       ) : (
-        <div className="relative p-4">
+        <div className="relative p-4 sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] lt:flex lt:items-end 2xl:px-[35rem]">
           <CharacterCard
             name={character?.name}
             birth={character?.birth_year}
@@ -113,15 +113,15 @@ const CharacterId = () => {
                 <BarLoader color="#FFE81F" />
               </div>
             ) : (
-              <div className="p-4 bg-[#1f1f1f] mt-5">
+              <div className="p-4 bg-[#1f1f1f] mt-5 lt:ml-5">
                 <Title className="underline" color="white">
                   Movies:
                 </Title>
-                <div className="flex flex-col gap-2 mt-5">
+                <div className="flex flex-col gap-2 mt-5 xl:grid xl:grid-rows-2 xl:grid-flow-col xl:gap-4">
                   {movies?.map((movie, index) => (
                     <span
                       key={index}
-                      className="flex justify-between items-center text-white text-sm font-light tracking-widest bg-[#242424] px-4 py-3 "
+                      className="flex justify-between items-center text-white text-sm font-light tracking-widest bg-[#242424] px-4 py-3  "
                     >
                       {movie?.title}
                       <CiShare1
@@ -136,7 +136,7 @@ const CharacterId = () => {
             ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 

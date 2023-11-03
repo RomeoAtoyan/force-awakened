@@ -27,17 +27,17 @@ const Characters = () => {
 
   return (
     <div>
-      <GIF src={gif} />
+      <GIF url={"/"} src={gif} />
       {characterLoading ? (
         <div className="h-40 flex items-center justify-center">
           <BarLoader color="#FFE81F" />
         </div>
       ) : (
-        <div className="p-4 pb-16">
+        <div className="p-4 pb-16 sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
           <Title className="underline" color="white">
             Characters
           </Title>
-          <div className="flex flex-col gap-2 mt-5">
+          <div className="flex flex-col gap-2 mt-5 xl:grid xl:grid-rows-5 xl:grid-flow-col xl:gap-4">
             {characters?.results?.map((character, index) => (
               <span
                 key={index}

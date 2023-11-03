@@ -1,12 +1,12 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { CiShare1 } from "react-icons/ci";
-import { MdNavigateNext, MdNavigateBefore } from "react-icons/md";
+import { MdNavigateBefore, MdNavigateNext } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
+import { BarLoader } from "react-spinners";
 import GIF from "../Components/GIF/GIF";
 import Title from "../Components/Title/Title";
 import AppData from "../Context/ApiData";
 import gif from "../assets/gifs/films_gif.gif";
-import { BarLoader } from "react-spinners";
 
 const Movies = () => {
   const {
@@ -15,7 +15,6 @@ const Movies = () => {
     setMoviesPage,
     moviesLoading,
     setMoviesLoading,
-    selectedMovie,
     setSelectedMovie,
   } = useContext(AppData);
   const navigate = useNavigate();
@@ -50,11 +49,11 @@ const Movies = () => {
           <BarLoader color="#FFE81F" />
         </div>
       ) : (
-        <div className="p-4 pb-16">
+        <div className="p-4 pb-16 sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
           <Title className="underline" color="white">
             Movies
           </Title>
-          <div className="flex flex-col gap-2 mt-5">
+          <div className="flex flex-col gap-2 mt-5 xl:grid xl:grid-rows-5 xl:grid-flow-col xl:gap-4">
             {movies?.results?.map((movie, index) => (
               <span
                 key={index}
