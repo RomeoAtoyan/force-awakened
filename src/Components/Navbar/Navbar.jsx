@@ -7,15 +7,16 @@ import { BarLoader } from "react-spinners";
 import FadeIn from "../../Animations/FadeIn";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState(false);
   const [results, setResults] = useState("");
   const [error, setError] = useState(false);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate();
   const [arr1, setArr1] = useState([]);
   const [arr2, setArr2] = useState([]);
+  const [nothingFound, setNothingFound] = useState(false);
 
   const getResults = async () => {
     if (query) {
@@ -33,8 +34,15 @@ const Navbar = () => {
         const data2 = await res2.json();
         setArr2(data2?.results);
         setLoading(false);
+
+        if (!data1.results.length && !data2.results.length) {
+          setNothingFound(true);
+        } else {
+          setNothingFound(false);
+        }
       } catch (error) {
-        error && console.log(error);
+        setError(true);
+        console.error(error);
       }
     } else {
       setError(true);
@@ -125,6 +133,10 @@ const Navbar = () => {
             onClick={() => {
               setOpen(false);
               setInput(!input);
+              setQuery("");
+              setResults([]);
+              setError(false);
+              setNothingFound(false);
             }}
             color="white"
             size={25}
@@ -177,6 +189,11 @@ const Navbar = () => {
                         </span>
                       </div>
                     ))}
+                    {nothingFound && (
+                      <span className="bg-[#1f1f1f] px-4 py-3 text-white">
+                        Nothing found...
+                      </span>
+                    )}
                   </div>
                 )
               )}

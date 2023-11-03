@@ -25,6 +25,10 @@ body {
   text-shadow: 1px 1px 5px gold;
 }
 
+.text-shadow:hover {
+    text-shadow: 3px 3px 7px gold;
+}
+
 /* longText fonts */
 .text-StarWars {
   font-family: "Star Wars";
