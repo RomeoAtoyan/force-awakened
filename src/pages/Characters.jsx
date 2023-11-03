@@ -37,7 +37,7 @@ const Characters = () => {
           <Title className="underline" color="white">
             Characters
           </Title>
-          <div className="flex flex-col gap-2 mt-5 xl:grid xl:grid-rows-5 xl:grid-flow-col xl:gap-4">
+          <div className="grid grid-rows-5 grid-flow-col gap-4 mt-5">
             {characters?.results?.map((character, index) => (
               <span
                 key={index}

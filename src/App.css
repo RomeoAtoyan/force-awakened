@@ -39,3 +39,9 @@ body {
 svg {
   cursor: pointer !important;
 }
+
+@media screen and (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}

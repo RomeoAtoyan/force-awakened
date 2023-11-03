@@ -76,7 +76,7 @@ const Navbar = () => {
               />
             )}
           </div>
-          <div className="sm:hidden md:flex md:w-8 md:gap-10 text-white underline">
+          <div className=" hide-mobile md:flex md:w-8 md:gap-10 text-white">
             <Link
               onClick={() => {
                 setInput(false);
@@ -118,82 +118,82 @@ const Navbar = () => {
             size={25}
           />
         </nav>
-      </header>
-      {input && (
-        <FadeIn>
-          <div className="h-max w-full right-0 shadow-lg border-b-2 z-50 border-[#FFE81F] absolute bg-black sm:w-max sm:right-20 sm:p-4 md:w-72 md:right-20 lg:right-40 xl:right-52 lt:right-72 2xl:right-100 2xl:mr-5">
-            <div className="pt-4">
-              <span className="text-white p-4 capitalize">
-                <span
-                  onClick={() => {
-                    setError(false);
-                    setSearchCategory("characters");
-                  }}
-                  className="underline"
-                >
-                  characters
-                </span>{" "}
-                or{" "}
-                <span
-                  onClick={() => {
-                    setError(false);
-                    setSearchCategory("movies");
-                  }}
-                  className="underline"
-                >
-                  movies
+        {input && (
+          <FadeIn>
+            <div className="z-50 absolute top-[100%] px-4 right-20 bg-black lg:right-[15%] 2xl:right-[24.5%]">
+              <div className="pt-4">
+                <span className="text-white p-4 capitalize">
+                  <span
+                    onClick={() => {
+                      setError(false);
+                      setSearchCategory("characters");
+                    }}
+                    className="underline cursor-pointer"
+                  >
+                    characters
+                  </span>{" "}
+                  or{" "}
+                  <span
+                    onClick={() => {
+                      setError(false);
+                      setSearchCategory("movies");
+                    }}
+                    className="underline cursor-pointer"
+                  >
+                    movies
+                  </span>
                 </span>
-              </span>
-              <div>
-                <input
-                  onChange={(e) => {
-                    setError(false);
-                    setQuery(e.target.value);
-                  }}
-                  value={query}
-                  placeholder={`search ${searchCategory}`}
-                  className={`${whenError} remove-border-radius outline-none m-4 pl-1`}
-                  type="text"
-                />
-                <button
-                  className="text-black bg-white px-2 p-0.5"
-                  onClick={getResults}
-                >
-                  Go
-                </button>
-              </div>
-            </div>
-            {results && results.length === 0 ? (
-              <span className="text-white p-4">
-                Nothing found with your search query...
-              </span>
-            ) : loading ? (
-              <div className="m-4">
-                <BarLoader color="yellow" />
-              </div>
-            ) : (
-              results && (
-                <div className="flex flex-col gap-2 p-4">
-                  {results?.map((result, index) => (
-                    <div key={index}>
-                      <span className="flex justify-between items-center text-white font-light tracking-widest bg-[#1f1f1f] px-4 py-3 ">
-                        {result?.name ||
-                          result?.title ||
-                          "No results were found matching your input"}
-                        <CiShare1
-                          onClick={() => goToCharacterId(result?.url)}
-                          size={20}
-                          color="white"
-                        />
-                      </span>
-                    </div>
-                  ))}
+                <div>
+                  <input
+                    onChange={(e) => {
+                      setError(false);
+                      setQuery(e.target.value);
+                    }}
+                    value={query}
+                    placeholder={`search ${searchCategory}`}
+                    className={`${whenError} remove-border-radius outline-none m-4 pl-1`}
+                    type="text"
+                  />
+                  <button
+                    className="text-black bg-white px-2 p-0.5"
+                    onClick={getResults}
+                  >
+                    Go
+                  </button>
                 </div>
-              )
-            )}
-          </div>
-        </FadeIn>
-      )}
+              </div>
+              {results && results.length === 0 ? (
+                <span className="text-white p-4">
+                  Nothing found with your search query...
+                </span>
+              ) : loading ? (
+                <div className="m-4">
+                  <BarLoader color="yellow" />
+                </div>
+              ) : (
+                results && (
+                  <div className="flex flex-col gap-2 p-4">
+                    {results?.map((result, index) => (
+                      <div key={index}>
+                        <span className="flex justify-between items-center text-white font-light tracking-widest bg-[#1f1f1f] px-4 py-3 ">
+                          {result?.name ||
+                            result?.title ||
+                            "No results were found matching your input"}
+                          <CiShare1
+                            onClick={() => goToCharacterId(result?.url)}
+                            size={20}
+                            color="white"
+                          />
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )
+              )}
+            </div>
+          </FadeIn>
+        )}
+      </header>
 
       {open && (
         <FadeIn>
