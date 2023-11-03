@@ -17,7 +17,7 @@
   transform: translateX(-50%);
   font-size: 2em;
   white-space: wrap;
-  animation: scroll 50s linear infinite;
+  animation: scroll 30s linear infinite;
 }
 
 @keyframes scroll {
@@ -29,8 +29,4 @@
   100% {
     transform: translate(-50%, -100%);
   }
-}
-
-@media screen and (min-width:1024px) {
-  
 }

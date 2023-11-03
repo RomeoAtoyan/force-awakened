@@ -19,11 +19,11 @@ const Movies = () => {
   } = useContext(AppData);
   const navigate = useNavigate();
 
+
   const goToMovieId = (movie, url) => {
     setSelectedMovie(movie);
     const modifiedString = url.split("/");
     const id = modifiedString[modifiedString.length - 2];
-    localStorage.setItem("selectedMovie", JSON.stringify(movie));
     navigate(`/movies/${id}`);
   };
 

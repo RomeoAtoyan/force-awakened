@@ -84,7 +84,7 @@ const CharacterId = () => {
 
   return (
     <div>
-      <div className="h-10 sm:px-20 mt-2 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
+      <div className="h-10 sm:px-20 mt-2 p-4 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
         <GoBackButton url="/characters" />
       </div>
       {loading ? (
