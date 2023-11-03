@@ -58,16 +58,13 @@ const Navbar = () => {
       )}
       {open && (
         <FadeIn>
-          <aside className="absolute h-64 w-full bg-black text-white flex items-center gap-1 flex-col justify-center">
-            {requests.map((request, index) => (
-              <Link
-                onClick={() => setOpen(false)}
-                key={index}
-                to={request.route}
-              >
-                <h2 className="capitalize py-1 px-2">{request.name}</h2>
-              </Link>
-            ))}
+          <aside className="z-50 absolute h-40 w-full bg-black text-white flex items-center gap-1 flex-col justify-center">
+            <Link onClick={() => setOpen(false)} to="/movies">
+              <h2 className="capitalize py-1 px-2">Movies</h2>
+            </Link>
+            <Link onClick={() => setOpen(false)} to="/characters">
+              <h2 className="capitalize py-1 px-2">Characters</h2>
+            </Link>
           </aside>
         </FadeIn>
       )}

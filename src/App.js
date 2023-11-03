@@ -5,6 +5,8 @@ import "./App.css";
 import Characters from "./pages/Characters";
 import { AppDataProvider } from "./Context/ApiData";
 import CharacterId from "./pages/CharacterId";
+import Movies from "./pages/Movies";
+import MoviesId from "./pages/MoviesId";
 
 const App = () => {
   return (
@@ -16,6 +18,8 @@ const App = () => {
             <Route exact path="/" element={<Home />} />
             <Route path="/characters" element={<Characters />} />
             <Route path="/characters/:id" element={<CharacterId />} />
+            <Route path="/movies" element={<Movies />} />
+            <Route path="/movies/:id" element={<MoviesId />} />
           </Routes>
         </Router>
       </AppDataProvider>

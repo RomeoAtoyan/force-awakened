@@ -5,60 +5,56 @@ import { useNavigate } from "react-router-dom";
 import GIF from "../Components/GIF/GIF";
 import Title from "../Components/Title/Title";
 import AppData from "../Context/ApiData";
-import gif from "../assets/gifs/people_gif.gif";
+import gif from "../assets/gifs/films_gif.gif";
 import { BarLoader } from "react-spinners";
-const Characters = () => {
-  const {
-    characters,
-    characterPage,
-    setCharacterPage,
-    characterLoading,
-    setCharacterLoading,
-  } = useContext(AppData);
+
+const Movies = () => {
+  const { movies, moviesPage, setMoviesPage, moviesLoading, setMoviesLoading } =
+    useContext(AppData);
   const navigate = useNavigate();
 
-  const goToCharacterId = (url) => {
+  const goToMovieId = (url) => {
     const modifiedString = url.split("/");
     const id = modifiedString[modifiedString.length - 2];
-    const goToUrl = `/characters/${id}`;
+    const goToUrl = `/movies/${id}`;
     navigate(goToUrl);
   };
 
   const nextPage = () => {
-    setCharacterLoading(true);
-    setCharacterPage((prevPage) => prevPage + 1);
+    setMoviesLoading(true);
+    setMoviesPage((prevPage) => prevPage + 1);
   };
 
   const prevPage = () => {
-    if (characterPage <= 1) {
+    if (moviesPage <= 1) {
       return;
     } else {
-      setCharacterLoading(true);
-      setCharacterPage((prevPage) => prevPage - 1);
+      setMoviesLoading(true);
+      setMoviesPage((prevPage) => prevPage - 1);
     }
   };
 
   return (
     <div>
       <GIF src={gif} />
-      {characterLoading ? (
+      {moviesLoading ? (
         <div className="h-40 flex items-center justify-center">
           <BarLoader color="#FFE81F" />
         </div>
       ) : (
         <div className="p-4 pb-16">
           <Title className="underline" color="white">
-            Characters
+            Movies
           </Title>
           <div className="flex flex-col gap-2 mt-5">
-            {characters?.results?.map((character, index) => (
+            {movies?.results?.map((movie, index) => (
               <span
                 key={index}
                 className="flex justify-between items-center text-StarWars text-white text-sm font-light tracking-widest bg-[#1f1f1f] px-4 py-3 "
               >
-                {character.name}
+                {movie?.title}
                 <CiShare1
-                  onClick={() => goToCharacterId(character.url)}
+                  onClick={() => goToMovieId(movie?.url)}
                   size={20}
                   color="white"
                 />
@@ -66,13 +62,17 @@ const Characters = () => {
             ))}
           </div>
           <div className="mt-5 flex justify-center items-center gap-10 bg-[#1f1f1f] py-2 text-white">
-            <button onClick={prevPage}>
-              <MdNavigateBefore color="#FFE81F" size={30} />
-            </button>
-            {characterPage}
-            <button onClick={nextPage}>
-              <MdNavigateNext color="#FFE81F" size={30} />
-            </button>
+            {movies?.count < 10 ? null : (
+              <button onClick={prevPage}>
+                <MdNavigateBefore color="#FFE81F" size={30} />
+              </button>
+            )}
+            {moviesPage}
+            {movies?.count < 10 ? null : (
+              <button onClick={nextPage}>
+                <MdNavigateNext color="#FFE81F" size={30} />
+              </button>
+            )}
           </div>
         </div>
       )}
@@ -80,4 +80,4 @@ const Characters = () => {
   );
 };
 
-export default Characters;
+export default Movies;

@@ -33,6 +33,8 @@ const CharacterId = () => {
       }
     };
 
+    console.log(detailsUrl + params.id);
+
     fetchDetails();
   }, [detailsUrl, params.id]);
 

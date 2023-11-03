@@ -1,0 +1,32 @@
+.star-wars-scroll {
+  position: relative;
+  width: 100%;
+  height: 40vh;
+  overflow: hidden;
+  background-color: black;
+  color: yellow;
+  transform: perspective(400px) rotateX(40deg);
+  box-shadow: 0 30px 30px 40px black;
+}
+
+.text {
+  width: 80%;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2em;
+  white-space: wrap;
+  animation: scroll 150s linear infinite;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translate(-50%, 100%);
+  }
+
+  100% {
+    transform: translate(-50%, -100%);
+  }
+}

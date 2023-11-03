@@ -41,7 +41,7 @@ const CharacterCard = ({
           <span className="capitalize text-[#FFE81F] flex items-center gap-3">
             weight : <span className="text-white">{weight} KG</span>
           </span>
-          <span className="capitalize text-[#FFE81F] flex items-center gap-3">
+          <span className="capitalize text-[#FFE81F]">
             Home :{" "}
             <span className="text-white">
               {homeworld} ({terrain})
