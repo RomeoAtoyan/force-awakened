@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { BarLoader } from "react-spinners";
 import findUrl from "../ApiRequests/findUrl";
 import { requests } from "../ApiRequests/requests";
@@ -9,6 +9,7 @@ import Title from "../Components/Title/Title";
 import { CiShare1 } from "react-icons/ci";
 
 const CharacterId = () => {
+  const navigate = useNavigate();
   const params = useParams();
   const detailsUrl = findUrl(requests, "characters");
   const [character, setCharacter] = useState([]);
@@ -76,6 +77,13 @@ const CharacterId = () => {
     fetchMovies();
   }, [character]);
 
+  const goToMovieId = (url) => {
+    const modifiedString = url.split("/");
+    const id = modifiedString[modifiedString.length - 2];
+    const goToUrl = `/movies/${id}`;
+    navigate(goToUrl);
+  };
+
   return (
     <>
       <div className="h-10">
@@ -88,16 +96,16 @@ const CharacterId = () => {
       ) : (
         <div className="relative p-4">
           <CharacterCard
-            name={character.name}
-            birth={character.birth_year}
-            gender={character.gender}
-            eyes={character.eye_color}
-            hair={character.hair_color}
-            height={character.height}
-            weight={character.mass}
-            homeworld={home.name}
-            terrain={home.terrain}
-            played_in={character.films.length}
+            name={character?.name}
+            birth={character?.birth_year}
+            gender={character?.gender}
+            eyes={character?.eye_color}
+            hair={character?.hair_color}
+            height={character?.height}
+            weight={character?.mass}
+            homeworld={home?.name}
+            terrain={home?.terrain}
+            played_in={character?.films.length}
             setShowMovies={setShowMovies}
             showMovies={showMovies}
           />
@@ -117,8 +125,12 @@ const CharacterId = () => {
                       key={index}
                       className="flex justify-between items-center text-StarWars text-white text-sm font-light tracking-widest bg-[#242424] px-4 py-3 "
                     >
-                      {movie.title}
-                      <CiShare1 size={20} color="white" />
+                      {movie?.title}
+                      <CiShare1
+                        onClick={() => goToMovieId(movie?.url)}
+                        size={20}
+                        color="white"
+                      />
                     </span>
                   ))}
                 </div>
