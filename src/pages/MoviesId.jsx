@@ -49,7 +49,7 @@ const MoviesId = () => {
             <BarLoader width={300} color="yellow" />
           </div>
         ) : (
-          <FadeIn duration={.5}>
+          <FadeIn duration={0.5}>
             <div className="relative p-4 sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
               <MovieCard
                 title={selectedMovie?.title}

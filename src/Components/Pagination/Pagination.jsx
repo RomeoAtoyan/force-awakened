@@ -10,12 +10,15 @@ const Pagination = ({
   setCharacterLoading,
   setCharacterPage,
 }) => {
+
   const nextPage = () => {
-    setCharacterLoading(true);
-    if (characterPage === characters?.count) {
-      return;
-    } else {
+    const lastPage = Math.ceil(characters?.count / 10);
+    
+    if (characterPage < lastPage) {
+      setCharacterLoading(true);
       setCharacterPage((prevPage) => prevPage + 1);
+    } else {
+      return;
     }
   };
 
@@ -29,11 +32,12 @@ const Pagination = ({
   };
 
   const skipToEnd = () => {
-    if (characterPage !== characters.count) {
+    const lastPage = Math.ceil(characters?.count / 10);
+
+    if (characterPage < lastPage) {
       setCharacterLoading(true);
-      setCharacterPage(Math.ceil(characters?.count / 10));
+      setCharacterPage(lastPage);
     }
-    return;
   };
 
   const goToStart = () => {
