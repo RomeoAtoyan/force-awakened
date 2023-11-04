@@ -8,6 +8,7 @@ import Title from "../Components/Title/Title";
 import AppData from "../Context/ApiData";
 import gif from "../assets/gifs/films_gif.gif";
 import FadeIn from "../Animations/FadeIn";
+import Error from "../Components/Errors/Error";
 
 const Movies = () => {
   const {
@@ -17,6 +18,7 @@ const Movies = () => {
     moviesLoading,
     setMoviesLoading,
     setSelectedMovie,
+    errorCodeMovies
   } = useContext(AppData);
   const navigate = useNavigate();
 
@@ -42,14 +44,14 @@ const Movies = () => {
   };
 
   return (
-    <FadeIn duration={.5}>
+    <FadeIn duration={0.5}>
       <GIF url="/" src={gif} />
       {moviesLoading ? (
         <div className="h-40 flex items-center justify-center">
           <BarLoader color="#FFE81F" />
         </div>
       ) : (
-        <FadeIn duration={.5}>
+        <FadeIn duration={0.5}>
           <div className="p-4 pb-16 sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
             <Title className="underline" color="white">
               Movies
@@ -85,6 +87,7 @@ const Movies = () => {
           </div>
         </FadeIn>
       )}
+      {errorCodeMovies && <Error />}
     </FadeIn>
   );
 };

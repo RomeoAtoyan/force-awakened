@@ -10,10 +10,9 @@ const Pagination = ({
   setCharacterLoading,
   setCharacterPage,
 }) => {
-
   const nextPage = () => {
     const lastPage = Math.ceil(characters?.count / 10);
-    
+
     if (characterPage < lastPage) {
       setCharacterLoading(true);
       setCharacterPage((prevPage) => prevPage + 1);
@@ -56,7 +55,7 @@ const Pagination = ({
         <MdNavigateBefore color="#FFE81F" size={30} />
       </button>
       <span>
-        {characterPage} of {Math.ceil(characters?.count / 10)}
+        {characterPage} of {Math.ceil(characters?.count / 10) || "no pages"}
       </span>
       <button onClick={nextPage}>
         <MdNavigateNext color="#FFE81F" size={30} />

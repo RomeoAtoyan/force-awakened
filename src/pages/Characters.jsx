@@ -8,6 +8,7 @@ import Title from "../Components/Title/Title";
 import AppData from "../Context/ApiData";
 import gif from "../assets/gifs/people_gif.gif";
 import FadeIn from "../Animations/FadeIn";
+import Error from "../Components/Errors/Error";
 
 const Characters = () => {
   const {
@@ -16,6 +17,7 @@ const Characters = () => {
     setCharacterPage,
     characterLoading,
     setCharacterLoading,
+    errorCodeChars,
   } = useContext(AppData);
   const navigate = useNavigate();
 
@@ -27,7 +29,7 @@ const Characters = () => {
   };
 
   return (
-    <FadeIn duration={.5}>
+    <FadeIn duration={0.5}>
       <GIF url={"/"} src={gif} />
       {characterLoading ? (
         <div className="h-40 flex items-center justify-center">
@@ -61,6 +63,7 @@ const Characters = () => {
           />
         </div>
       )}
+      {errorCodeChars && <Error />}
     </FadeIn>
   );
 };

@@ -58,8 +58,6 @@ const Navbar = () => {
       setResults([...arr1, ...arr2]);
       setLoading(false);
     }
-
-    console.log([...arr1, ...arr2]);
   }, [arr1, arr2]);
 
   const goToCharacterId = (url, data) => {

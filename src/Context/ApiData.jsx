@@ -14,6 +14,9 @@ export const AppDataProvider = ({ children }) => {
   const [moviesPage, setMoviesPage] = useState(1);
   const [moviesLoading, setMoviesLoading] = useState(true);
 
+  const [errorCodeChars, setErrorCodeChars] = useState(null);
+  const [errorCodeMovies, setErrorCodeMovies] = useState(null);
+
   const filmUrl = findUrl(requests, "movies");
   const peopleUrl = findUrl(requests, "characters");
 
@@ -22,13 +25,17 @@ export const AppDataProvider = ({ children }) => {
       try {
         const response = await fetch(`${peopleUrl}?page=${characterPage}`);
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          const statusCode = response.status;
+          setErrorCodeChars(statusCode);
+          setCharacterLoading(true);
+        } else {
+          setErrorCodeChars(null); 
         }
         const data = await response.json();
         setCharacters(data);
         setCharacterLoading(false);
       } catch (error) {
-        console.error("Error:", error);
+        console.log("Error:", error);
       }
     };
 
@@ -40,18 +47,23 @@ export const AppDataProvider = ({ children }) => {
       try {
         const response = await fetch(`${filmUrl}?page=${moviesPage}`);
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          const statusCode = response.status;
+          setErrorCodeMovies(statusCode); 
+          setMoviesLoading(true);
+        } else {
+          setErrorCodeMovies(null); 
         }
         const data = await response.json();
         setMovies(data);
         setMoviesLoading(false);
       } catch (error) {
-        console.error("Error:", error);
+        console.log("Error:", error);
       }
     };
 
     fetchMovies();
   }, [filmUrl, moviesPage]);
+
 
   return (
     <AppData.Provider
@@ -69,6 +81,10 @@ export const AppDataProvider = ({ children }) => {
         setCharacterLoading,
         selectedMovie,
         setSelectedMovie,
+        errorCodeChars,
+        setErrorCodeChars,
+        errorCodeMovies,
+        setErrorCodeMovies,
       }}
     >
       {children}
