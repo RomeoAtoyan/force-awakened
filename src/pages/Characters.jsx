@@ -63,7 +63,7 @@ const Characters = () => {
           />
         </div>
       )}
-      {errorCodeChars && <Error />}
+      {errorCodeChars && <Error errorCode={errorCodeChars} />}
     </FadeIn>
   );
 };

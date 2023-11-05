@@ -22,21 +22,17 @@ export const AppDataProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchCharacters = async () => {
-      try {
-        const response = await fetch(`${peopleUrl}?page=${characterPage}`);
-        if (!response.ok) {
-          const statusCode = response.status;
-          setErrorCodeChars(statusCode);
-          setCharacterLoading(true);
-        } else {
-          setErrorCodeChars(null); 
-        }
-        const data = await response.json();
-        setCharacters(data);
-        setCharacterLoading(false);
-      } catch (error) {
-        console.log("Error:", error);
+      const response = await fetch(`${peopleUrl}?page=${characterPage}`);
+      if (!response.ok) {
+        const statusCode = response.status;
+        setErrorCodeChars(statusCode);
+        setCharacterLoading(true);
+      } else {
+        setErrorCodeChars(null);
       }
+      const data = await response.json();
+      setCharacters(data);
+      setCharacterLoading(false);
     };
 
     fetchCharacters();
@@ -44,26 +40,21 @@ export const AppDataProvider = ({ children }) => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      try {
-        const response = await fetch(`${filmUrl}?page=${moviesPage}`);
-        if (!response.ok) {
-          const statusCode = response.status;
-          setErrorCodeMovies(statusCode); 
-          setMoviesLoading(true);
-        } else {
-          setErrorCodeMovies(null); 
-        }
-        const data = await response.json();
-        setMovies(data);
-        setMoviesLoading(false);
-      } catch (error) {
-        console.log("Error:", error);
+      const response = await fetch(`${filmUrl}?page=${moviesPage}`);
+      if (!response.ok) {
+        const statusCode = response.status;
+        setErrorCodeMovies(statusCode);
+        setMoviesLoading(true);
+      } else {
+        setErrorCodeMovies(null);
       }
+      const data = await response.json();
+      setMovies(data);
+      setMoviesLoading(false);
     };
 
     fetchMovies();
   }, [filmUrl, moviesPage]);
-
 
   return (
     <AppData.Provider

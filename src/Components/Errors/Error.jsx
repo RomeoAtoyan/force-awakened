@@ -1,9 +1,6 @@
 import { motion } from "framer-motion";
-import { useContext } from "react";
-import AppData from "../../Context/ApiData";
 
-const Error = () => {
-  const { errorCode } = useContext(AppData);
+const Error = ({ errorCode, className }) => {
   let errorMessage;
 
   switch (errorCode) {
@@ -16,13 +13,16 @@ const Error = () => {
     case 403:
       errorMessage = <span>you are not authorized</span>;
       break;
+    case 404:
+      errorMessage = <span>request not found</span>;
+      break;
     default:
       errorMessage = <span>request has failed</span>;
   }
 
   return (
     <motion.div
-      className="absolute top-100"
+      className={`absolute ${className}`}
       initial={{ left: "-20%" }}
       animate={{ left: 20 }}
       transition={{ duration: 0.5 }}

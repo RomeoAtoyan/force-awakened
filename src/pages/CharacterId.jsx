@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
+import { CiShare1 } from "react-icons/ci";
 import { useNavigate, useParams } from "react-router-dom";
 import { BarLoader } from "react-spinners";
+import FadeIn from "../Animations/FadeIn";
 import findUrl from "../ApiRequests/findUrl";
 import { requests } from "../ApiRequests/requests";
 import CharacterCard from "../Components/Card/CharacterCard";
+import Error from "../Components/Errors/Error";
 import GoBackButton from "../Components/GoBackButton/GoBackButton";
 import Title from "../Components/Title/Title";
-import { CiShare1 } from "react-icons/ci";
-import FadeIn from "../Animations/FadeIn";
 
 const CharacterId = () => {
   const navigate = useNavigate();
@@ -19,13 +20,14 @@ const CharacterId = () => {
   const [moviesLoading, setMoviesLoading] = useState(true);
   const [movies, setMovies] = useState([]);
   const [showMovies, setShowMovies] = useState(false);
+  const [errorCode, setErrorCode] = useState("");
 
   useEffect(() => {
     const fetchDetails = async () => {
       try {
         const response = await fetch(detailsUrl + params.id);
         if (!response.ok) {
-          throw new Error("Network response was not ok");
+          setErrorCode(response?.status);
         }
         const data = await response.json();
         setCharacter(data);
@@ -36,24 +38,28 @@ const CharacterId = () => {
     };
 
     fetchDetails();
-  }, [detailsUrl, params.id]);
+  }, [detailsUrl, params.id, setErrorCode]);
 
-  useEffect(() => {
-    const fetchHome = async () => {
-      try {
-        const response = await fetch(character.homeworld);
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        setHome(data);
-      } catch (error) {
-        console.error("Error:", error);
+useEffect(() => {
+  const fetchHome = async () => {
+    try {
+      const response = await fetch(character.homeworld);
+      if (!response.ok) {
+        setErrorCode(response.status);
       }
-    };
+      const data = await response.json();
+      setHome(data);
+      console.log(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
 
+  if (character.homeworld) {
     fetchHome();
-  }, [character.homeworld]);
+  }
+}, [character.homeworld]);
+
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -64,7 +70,7 @@ const CharacterId = () => {
             const movieData = await response.json();
             return movieData;
           }
-          return null; // Return null when movie data is not available
+          return null;
         });
 
         const movieDetails = await Promise.all(movieDataPromises);
@@ -94,21 +100,25 @@ const CharacterId = () => {
         </div>
       ) : (
         <div className="relative p-4 sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] lt:flex lt:items-end 2xl:px-[35rem]">
-          <FadeIn duration={.5}>
-            <CharacterCard
-              name={character?.name}
-              birth={character?.birth_year}
-              gender={character?.gender}
-              eyes={character?.eye_color}
-              hair={character?.hair_color}
-              height={character?.height}
-              weight={character?.mass}
-              homeworld={home?.name}
-              terrain={home?.terrain}
-              played_in={character?.films.length}
-              setShowMovies={setShowMovies}
-              showMovies={showMovies}
-            />
+          <FadeIn duration={0.5}>
+            {errorCode ? (
+              <Error className="top-48" errorCode={errorCode} />
+            ) : (
+              <CharacterCard
+                name={character?.name}
+                birth={character?.birth_year}
+                gender={character?.gender}
+                eyes={character?.eye_color}
+                hair={character?.hair_color}
+                height={character?.height}
+                weight={character?.mass}
+                homeworld={home?.name}
+                terrain={home?.terrain}
+                played_in={character?.films?.length}
+                setShowMovies={setShowMovies}
+                showMovies={showMovies}
+              />
+            )}
           </FadeIn>
           {showMovies &&
             (moviesLoading ? (
@@ -116,7 +126,7 @@ const CharacterId = () => {
                 <BarLoader color="#FFE81F" />
               </div>
             ) : (
-              <FadeIn duration={.5}>
+              <FadeIn duration={0.5}>
                 <div className="p-4 bg-[#1f1f1f] mt-5 lt:ml-5">
                   <Title className="underline" color="white">
                     Movies:

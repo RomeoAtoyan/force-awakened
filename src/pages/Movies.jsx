@@ -18,7 +18,7 @@ const Movies = () => {
     moviesLoading,
     setMoviesLoading,
     setSelectedMovie,
-    errorCodeMovies
+    errorCodeMovies,
   } = useContext(AppData);
   const navigate = useNavigate();
 
@@ -87,7 +87,7 @@ const Movies = () => {
           </div>
         </FadeIn>
       )}
-      {errorCodeMovies && <Error />}
+      {errorCodeMovies && <Error errorCode={errorCodeMovies} />}
     </FadeIn>
   );
 };
