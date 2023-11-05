@@ -1,12 +1,13 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Navbar from "./Components/Navbar/Navbar";
-import Home from "./pages/Home";
 import "./App.css";
-import Characters from "./pages/Characters";
+import Navbar from "./Components/Navbar/Navbar";
 import { AppDataProvider } from "./Context/ApiData";
 import CharacterId from "./pages/CharacterId";
+import Characters from "./pages/Characters";
+import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import MoviesId from "./pages/MoviesId";
+import NotFound from "./Components/NotFound/NotFound";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
             <Route path="/characters/:id" element={<CharacterId />} />
             <Route path="/movies" element={<Movies />} />
             <Route path="/movies/:id" element={<MoviesId />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </AppDataProvider>
