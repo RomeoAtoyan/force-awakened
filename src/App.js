@@ -7,7 +7,7 @@ import Characters from "./pages/Characters";
 import Home from "./pages/Home";
 import Movies from "./pages/Movies";
 import MoviesId from "./pages/MoviesId";
-import NotFound from "./Components/NotFound/NotFound";
+import NotFound from "./pages/NotFound";
 
 const App = () => {
   return (

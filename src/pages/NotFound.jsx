@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Title from "../Title/Title";
+import Title from "../Components/Title/Title";
 
 const NotFound = () => {
   return (

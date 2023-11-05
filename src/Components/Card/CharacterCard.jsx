@@ -17,7 +17,7 @@ const CharacterCard = ({
   showMovies,
 }) => {
   return (
-    <div >
+    <div>
       <div className="min-h-60 bg-[#1f1f1f] mt-8 p-4">
         <Title className="underline text-white">{name}</Title>
         <div className="pt-5">
@@ -48,11 +48,12 @@ const CharacterCard = ({
             </span>
           </span>
           <span className="capitalize text-[#FFE81F] flex items-center gap-3">
-            Movies played in : <span className="text-white cursor-pointer">{played_in}</span>
+            Movies played in :{" "}
+            <span className="text-white cursor-pointer">{played_in}</span>
             {!showMovies && (
               <span
                 onClick={() => setShowMovies(true)}
-                className="text-gray-700"
+                className="text-gray-700 cursor-pointer"
               >
                 (show movies)
               </span>
