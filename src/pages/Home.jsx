@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import LongText from "../Components/LongText/LongText";
-import gif from "../assets/gifs/home_gif.gif";
+// import gif from "../assets/gifs/home_gif.gif";
+import gif from "../assets/gifs/cockpit_gif.gif";
 import Title from "../Components/Title/Title";
 import GIF from "../Components/GIF/GIF";
 import FadeIn from "../Animations/FadeIn";
