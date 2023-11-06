@@ -40,26 +40,24 @@ const CharacterId = () => {
     fetchDetails();
   }, [detailsUrl, params.id, setErrorCode]);
 
-useEffect(() => {
-  const fetchHome = async () => {
-    try {
-      const response = await fetch(character.homeworld);
-      if (!response.ok) {
-        setErrorCode(response.status);
+  useEffect(() => {
+    const fetchHome = async () => {
+      try {
+        const response = await fetch(character.homeworld);
+        if (!response.ok) {
+          setErrorCode(response.status);
+        }
+        const data = await response.json();
+        setHome(data);
+      } catch (error) {
+        console.error("Error:", error);
       }
-      const data = await response.json();
-      setHome(data);
-      console.log(data);
-    } catch (error) {
-      console.error("Error:", error);
+    };
+
+    if (character.homeworld) {
+      fetchHome();
     }
-  };
-
-  if (character.homeworld) {
-    fetchHome();
-  }
-}, [character.homeworld]);
-
+  }, [character.homeworld]);
 
   useEffect(() => {
     const fetchMovies = async () => {
