@@ -20,7 +20,7 @@ const MoviesId = () => {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const response = await fetch(`${url}${params.id}p`);
+        const response = await fetch(`${url}${params.id}`);
         if (!response.ok) {
           setErrorCode(response?.status);
         }
