@@ -172,7 +172,7 @@ const Navbar = () => {
                 )}
               </div>
               {loading ? (
-                <div className="m-4">
+                <div className="p-5">
                   <BarLoader color="yellow" />
                 </div>
               ) : (
