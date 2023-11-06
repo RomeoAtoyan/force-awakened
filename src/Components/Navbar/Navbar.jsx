@@ -141,8 +141,13 @@ const Navbar = () => {
           />
         </nav>
         {input && (
-          <FadeIn duration={.5}>
-            <div className="w-full md:w-max px-4 right-0 md:right-20 bg-gray-700 lg:right-[15%] 2xl:right-[24.5%]">
+          <FadeIn
+            className={
+              "absolute z-50 right-0 md:right-20 lg:right-[15%] 2xl:right-[24.5%]"
+            }
+            duration={0.5}
+          >
+            <div className="w-full md:w-max pr-4 bg-gray-700  ">
               <div className="pt-4">
                 <div>
                   <input
