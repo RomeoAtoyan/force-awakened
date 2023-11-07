@@ -17,7 +17,7 @@
   transform: translateX(-50%);
   font-size: 2em;
   white-space: wrap;
-  animation: scroll 30s linear infinite;
+  animation: scroll 50s linear infinite;
 }
 
 @keyframes scroll {

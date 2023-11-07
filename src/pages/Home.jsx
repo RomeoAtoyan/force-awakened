@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
-import LongText from "../Components/LongText/LongText";
-// import gif from "../assets/gifs/home_gif.gif";
-import gif from "../assets/gifs/cockpit_gif.gif";
-import Title from "../Components/Title/Title";
-import GIF from "../Components/GIF/GIF";
 import FadeIn from "../Animations/FadeIn";
+import GIF from "../Components/GIF/GIF";
+import LongText from "../Components/LongText/LongText";
+import Title from "../Components/Title/Title";
+import gif from "../assets/gifs/cockpit_gif.gif";
 
 const Home = () => {
   return (
-    <FadeIn duration={.5}>
+    <FadeIn duration={0.5}>
       <GIF src={gif} />
       <div className="p-4 text-white sm:px-20 lg:px-40 xl:px-52 lt:px-[18rem] 2xl:px-[35rem]">
         <Title className="lg:text-3xl">Star Wars newbie ?</Title>

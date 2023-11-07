@@ -226,6 +226,15 @@ const Navbar = () => {
             >
               <h2 className="capitalize py-1 px-2">Characters</h2>
             </Link>
+            <Link
+              onClick={() => {
+                setInput(false);
+                setOpen(false);
+              }}
+              to="/game"
+            >
+              <h2 className="capitalize py-1 px-2">R2D2 in the desert</h2>
+            </Link>
           </aside>
         </FadeIn>
       )}
