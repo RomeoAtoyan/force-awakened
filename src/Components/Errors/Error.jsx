@@ -1,6 +1,9 @@
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const Error = ({ errorCode, className }) => {
+  const [error, setError] = useState(true);
+
   let errorMessage;
 
   switch (errorCode) {
@@ -20,7 +23,13 @@ const Error = ({ errorCode, className }) => {
       errorMessage = <span>request has failed</span>;
   }
 
-  return (
+  useEffect(() => {
+    setTimeout(() => {
+      setError(false);
+    }, 3000);
+  }, [error]);
+
+  return error ? (
     <motion.div
       className={`absolute ${className}`}
       initial={{ left: "-20%" }}
@@ -33,6 +42,8 @@ const Error = ({ errorCode, className }) => {
         </span>
       </div>
     </motion.div>
+  ) : (
+    ""
   );
 };
 
